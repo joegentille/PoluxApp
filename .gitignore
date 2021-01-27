@@ -1,0 +1,6 @@
+## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+obj
+bin
+appsettings.json
+*.db

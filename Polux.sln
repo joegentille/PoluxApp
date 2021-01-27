@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polux.API", "Polux.API\Polux.API.csproj", "{9DBCEBA7-3831-4666-9CB4-4A19AE606AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polux.Core", "Polux.Core\Polux.Core.csproj", "{61A7F1CF-D496-486A-B512-131E0394BECB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polux.Infrastructure", "Polux.Infrastructure\Polux.Infrastructure.csproj", "{94CCF0A7-F49D-41B8-8F14-B2197FF0DFE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{07DFCEC3-8867-4DEB-8643-F40BB0F704DC}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9DBCEBA7-3831-4666-9CB4-4A19AE606AB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DBCEBA7-3831-4666-9CB4-4A19AE606AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DBCEBA7-3831-4666-9CB4-4A19AE606AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DBCEBA7-3831-4666-9CB4-4A19AE606AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A7F1CF-D496-486A-B512-131E0394BECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A7F1CF-D496-486A-B512-131E0394BECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A7F1CF-D496-486A-B512-131E0394BECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A7F1CF-D496-486A-B512-131E0394BECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94CCF0A7-F49D-41B8-8F14-B2197FF0DFE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94CCF0A7-F49D-41B8-8F14-B2197FF0DFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94CCF0A7-F49D-41B8-8F14-B2197FF0DFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94CCF0A7-F49D-41B8-8F14-B2197FF0DFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C78A459E-89D7-48D0-8EA5-CE89A3312DE2}
+	EndGlobalSection
+EndGlobal
