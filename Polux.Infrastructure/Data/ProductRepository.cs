@@ -15,22 +15,28 @@ namespace Polux.Infrastructure.Data
             _context = context;
         }
 
-        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-            var productBrands = await _context.ProductBrands.ToListAsync();
-            return productBrands;
+            var products = await _context.Products
+                .Include(p => p.ProductType)
+                .Include(p => p.ProductBrand)
+                .ToListAsync();
+            return products;
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _context.Products
+                .Include(p => p.ProductType)
+                .Include(p => p.ProductBrand)
+                .FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsAsync()
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
         {
-            var products = await _context.Products.ToListAsync();
-            return products;
+            var productBrands = await _context.ProductBrands.ToListAsync();
+            return productBrands;
         }
 
         public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
