@@ -1,6 +1,6 @@
-﻿using Polux.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Polux.Core.Entities;
 using Polux.Core.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,24 +8,35 @@ namespace Polux.Infrastructure.Data
 {
     public class ProductRepository : IProductRepository
     {
-        public Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        private readonly StoreContext _context;
+
+        public ProductRepository(StoreContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<Product> GetProductByIdAsync(int id)
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
         {
-            throw new NotImplementedException();
+            var productBrands = await _context.ProductBrands.ToListAsync();
+            return productBrands;
         }
 
-        public Task<IReadOnlyList<Product>> GetProductsAsync()
+        public async Task<Product> GetProductByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            return product;
         }
 
-        public Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-            throw new NotImplementedException();
+            var products = await _context.Products.ToListAsync();
+            return products;
+        }
+
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        {
+            var productTypes = await _context.ProductTypes.ToListAsync();
+            return productTypes;
         }
     }
 }
