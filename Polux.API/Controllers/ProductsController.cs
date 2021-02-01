@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Polux.Core.Entities;
 using Polux.Core.Interfaces;
+using Polux.Core.Specifications;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,7 +25,8 @@ namespace Polux.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Product>>> GetProducts()
         {
-            var products = await _productsRepo.ListAllAsync();
+            var spec = new ProductsWithTypesAndBrandsSpecification();
+            var products = await _productsRepo.ListAsync(spec);
             return Ok(products);
         }
 
