@@ -33,6 +33,7 @@ namespace Polux.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Aqui el orden es importante!
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -43,6 +44,8 @@ namespace Polux.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
