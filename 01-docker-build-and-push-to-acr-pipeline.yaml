@@ -1,0 +1,42 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+- name: dockerRegistryServiceConnection
+  value: acr-dev-connection
+- name: imageRepository
+  value: imgpoluxwebapp
+- name: dockerfilePath
+  value: '$(Build.SourcesDirectory)/Dockerfile'
+- name: tag
+  value: '$(Build.BuildId)'
+- name: semanticVersion
+  value: '2021.01.$(Build.BuildId)'
+- name: apiVersion
+  value: 'v1'
+- name: vmImageName
+  value: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+          $(semanticVersion)
+          $(apiVersion)
