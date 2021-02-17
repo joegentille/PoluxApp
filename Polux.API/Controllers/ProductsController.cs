@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Polux.API.Dtos;
+using Polux.API.Errors;
 using Polux.Core.Entities;
 using Polux.Core.Interfaces;
 using Polux.Core.Specifications;
@@ -33,10 +35,16 @@ namespace Polux.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ProductToReturnDto>> GetProductById(int id)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
             var product = await _productsRepo.GetEntityWithSpec(spec);
+            if(product == null)
+            {
+                return NotFound(new ApiResponse(404));
+            }
             return Ok(_mapper.Map<Product, ProductToReturnDto>(product));
         }
 

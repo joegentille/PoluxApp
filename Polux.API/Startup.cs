@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Polux.API.Errors;
 using Polux.API.Helpers;
 using Polux.API.Middleware;
@@ -55,6 +55,11 @@ namespace Polux.API
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Skinet API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +77,13 @@ namespace Polux.API
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => 
+            { 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SkiNet API v1"); 
+            });
 
             app.UseEndpoints(endpoints =>
             {
