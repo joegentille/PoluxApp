@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Polux.Core.Specifications
+﻿namespace Polux.Core.Specifications
 {
     public class ProductSpecParams
     {
@@ -23,5 +19,13 @@ namespace Polux.Core.Specifications
         public int? TypeId { get; set; }
 
         public string Sort { get; set; }
+
+        private string _search;
+
+        public string Search 
+        {
+            get => _search;
+            set => _search = value.ToLower();
+        }
     }
 }
