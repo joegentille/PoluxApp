@@ -3,6 +3,7 @@ import { IProduct } from '../shared/models/product';
 import { ShopService } from './shop.service';
 import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/productType';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
@@ -15,6 +16,12 @@ export class ShopComponent implements OnInit {
   types: IType[];
   brandIdSelected: number = 0;
   typeIdSelected: number = 0;
+  sortSelected = 'name';
+  sortOptions = [
+    {name: 'Alphabetical', value: 'name'},
+    {name: 'Price: Low to Hight', value: 'priceAsc'},
+    {name: 'Price: Hight to Low', value: 'priceDesc'},
+  ];
 
   constructor(private shopService: ShopService) { }
 
@@ -26,7 +33,7 @@ export class ShopComponent implements OnInit {
 
   getProducts()
   {
-    this.shopService.getProducts(this.brandIdSelected, this.typeIdSelected).subscribe(response => 
+    this.shopService.getProducts(this.brandIdSelected, this.typeIdSelected, this.sortSelected).subscribe(response => 
     {
       this.products = response.data;
     }, error => {
@@ -63,6 +70,12 @@ export class ShopComponent implements OnInit {
   onTypeSelected(typeId: number)
   {
     this.typeIdSelected = typeId;
+    this.getProducts();
+  }
+
+  onSortSelected(sort: string)
+  {
+    this.sortSelected = sort;
     this.getProducts();
   }
 
