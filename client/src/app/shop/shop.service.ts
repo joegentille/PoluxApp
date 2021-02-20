@@ -36,7 +36,7 @@ export class ShopService {
 
     params = params.append('pageIndex', shopParams.pageNumber.toString());
 
-    params = params.append('pageIndex', shopParams.pageSize.toString());
+    params = params.append('pageSize', shopParams.pageSize.toString());
 
     return this.http.get<IPagination>(this.baseUrl + 'products', {observe: 'response', params})
       .pipe(
