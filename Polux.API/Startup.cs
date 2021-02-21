@@ -8,14 +8,17 @@ using Polux.API.Extensions;
 using Polux.API.Helpers;
 using Polux.API.Middleware;
 using Polux.Infrastructure.Data;
+using StackExchange.Redis;
 
 namespace Polux.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IConfiguration _config;
+
+        public Startup(IConfiguration config)
         {
-            Configuration = configuration;
+            _config = config;
         }
 
         public IConfiguration Configuration { get; }
@@ -27,8 +30,15 @@ namespace Polux.API
             services.AddControllers();
             services.AddApplicationServices();
             services.AddDbContext<StoreContext>(opt =>
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                opt.UseSqlite(_config.GetConnectionString("DefaultConnection"))
             );
+
+            services.AddSingleton<ConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(_config
+                    .GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
             services.AddSwaggerDocumentation();
             services.AddCors(opt =>
             {
