@@ -12,8 +12,9 @@ namespace Polux.API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+            
             // Para modificar el comportamiento de ApiController
             // Probar este request https://localhost:5001/api/buggy/badrequest/five
             // sin la configuracion de abajo para ver la diferencia de respuestas
