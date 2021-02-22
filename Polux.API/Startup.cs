@@ -7,6 +7,7 @@ using Polux.API.Extensions;
 using Polux.API.Helpers;
 using Polux.API.Middleware;
 using Polux.Infrastructure.Data;
+using Polux.Infrastructure.Identity;
 using StackExchange.Redis;
 
 namespace Polux.API
@@ -31,6 +32,11 @@ namespace Polux.API
             services.AddDbContext<StoreContext>(opt =>
                 opt.UseSqlite(_config.GetConnectionString("DefaultConnection"))
             );
+
+            services.AddDbContext<AppIdentityDbContext>(x =>
+            {
+                x.UseSqlite(_config.GetConnectionString("IdentityConnection"));
+            });
 
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configuration = ConfigurationOptions.Parse(_config
