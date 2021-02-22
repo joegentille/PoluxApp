@@ -28,7 +28,7 @@ namespace Polux.API
         {            
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
-            services.AddApplicationServices();
+            
             services.AddDbContext<StoreContext>(opt =>
                 opt.UseSqlite(_config.GetConnectionString("DefaultConnection"))
             );
@@ -44,6 +44,8 @@ namespace Polux.API
                 return ConnectionMultiplexer.Connect(configuration);
             });
 
+            services.AddApplicationServices();
+            services.AddIdentityServices();
             services.AddSwaggerDocumentation();
             services.AddCors(opt =>
             {
