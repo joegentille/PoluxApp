@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Polux.API.Errors;
 using Polux.Core.Interfaces;
 using Polux.Infrastructure.Data;
+using Polux.Infrastructure.Services;
 using System.Linq;
 
 namespace Polux.API.Extensions
@@ -11,6 +12,7 @@ namespace Polux.API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
