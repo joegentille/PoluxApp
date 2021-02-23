@@ -7,8 +7,6 @@ using Polux.API.Errors;
 using Polux.API.Extensions;
 using Polux.Core.Entities.Identity;
 using Polux.Core.Interfaces;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Polux.API.Controllers
@@ -105,6 +103,11 @@ namespace Polux.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
+            if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
+            {
+                return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Email address is in use" } });
+            }
+
             var user = new AppUser
             {
                 DisplayName = registerDto.DisplayName,
