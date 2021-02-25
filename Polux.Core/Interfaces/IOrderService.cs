@@ -1,0 +1,17 @@
+﻿using Polux.Core.Entities.OrderAggregate;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Polux.Core.Interfaces
+{
+    public interface IOrderService
+    {
+        Task<Order> CreateOrderAsync(string buyerEmail, int deliveryMethod, string basketId, Address shippingAddres);
+
+        Task<IReadOnlyList<Order>> GetOrdersForUserAsync(string buyerEmail);
+
+        Task<Order> GetOrderByIdAsync(int id, string buyerEmail);
+
+        Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodAsync();
+    }
+}
